@@ -1797,6 +1797,27 @@ body {
 .cid-qTkA127IK8 {
   background-image: url("../../../assets/images/background4.jpg");
 }
+.cid-rs927Xpb0m {
+  padding-top: 90px;
+  padding-bottom: 90px;
+  background-color: #ffffff;
+}
+.cid-rs927Xpb0m .title {
+  margin-bottom: 2rem;
+}
+.cid-rs927Xpb0m .mbr-section-subtitle {
+  color: #767676;
+}
+.cid-rs927Xpb0m a:not([href]):not([tabindex]) {
+  color: #fff;
+  border-radius: 3px;
+}
+.cid-rs927Xpb0m a.btn-white:not([href]):not([tabindex]) {
+  color: #333;
+}
+.cid-rs927Xpb0m textarea.form-control {
+  min-height: 188px;
+}
 .cid-qTkAaeaxX5 {
   padding-top: 60px;
   padding-bottom: 60px;
