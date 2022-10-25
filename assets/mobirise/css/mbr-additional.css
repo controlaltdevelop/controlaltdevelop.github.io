@@ -1125,13 +1125,6 @@ section.lazy-placeholder:after {
   font-style: italic;
   letter-spacing: 1rem;
 }
-.cid-tlabwLLGH4 {
-  background: linear-gradient(45deg, #f3f4f6, #620fae);
-}
-.cid-tlabwLLGH4 .mbr-section-subtitle {
-  font-style: italic;
-  letter-spacing: 1rem;
-}
 .cid-rsRZm5IpnW {
   padding-top: 60px;
   padding-bottom: 60px;
@@ -1190,6 +1183,31 @@ section.lazy-placeholder:after {
   }
   .cid-rsRZKByUay .media-content {
     padding-top: 1.5rem !important;
+  }
+}
+.cid-tlfH5p5ahZ {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: #f3f4f6;
+}
+.cid-tlfH5p5ahZ .testimonial-text {
+  font-style: italic;
+  color: #223322;
+  font-weight: 300;
+}
+.cid-tlfH5p5ahZ .mbr-author-name {
+  font-weight: bold;
+  color: #232;
+}
+.cid-tlfH5p5ahZ .mbr-author-desc {
+  color: #223322;
+}
+@media (max-width: 991px) {
+  .cid-tlfH5p5ahZ .mbr-figure,
+  .cid-tlfH5p5ahZ img {
+    max-height: 300px;
+    width: auto;
+    margin: auto;
   }
 }
 .cid-rscQvrh5yy {
