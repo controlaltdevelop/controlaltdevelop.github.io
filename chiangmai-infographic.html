@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chiang Mai Passive House | Project Cost & Feasibility</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Project Palette & Custom Styles -->
+    <!-- Palette: Deep Navy & Vibrant Coral -->
+    <!-- 
+        Palette Name: "Strategic Blueprint"
+        Primary: #1D3557 (Deep Navy)
+        Secondary: #457B9D (Steel Blue)
+        Accent: #E63946 (Vibrant Coral/Red)
+        Neutral: #A8DADC (Pale Aqua)
+        Background: #F1FAEE (Off White)
+    -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                navy: '#1D3557',
+                steel: '#457B9D',
+                coral: '#E63946',
+                aqua: '#A8DADC',
+                light: '#F1FAEE',
+              },
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      body {
+        background-color: #f1faee;
+        color: #1d3557;
+      }
+
+      /* Chart Container Strict Styling */
+      .chart-container {
+        position: relative;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        /* Base height for mobile */
+        height: 300px;
+        max-height: 400px;
+      }
+
+      /* Large Screen adjustments for charts */
+      @media (min-width: 768px) {
+        .chart-container {
+          height: 400px;
+        }
+      }
+
+      /* Card Elevation */
+      .card {
+        background-color: white;
+        border-radius: 0.75rem; /* rounded-xl */
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        transition: transform 0.2s ease-in-out;
+      }
+
+      .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+
+      /* Timeline Grid Styling */
+      .timeline-grid {
+        display: grid;
+        grid-template-columns: 100px repeat(6, 1fr); /* Label + 6 Years */
+        gap: 4px;
+        align-items: center;
+      }
+
+      .timeline-bar {
+        height: 24px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        color: white;
+        font-weight: 600;
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1faee;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #457b9d;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #1d3557;
+      }
+    </style>
+
+    <!-- NO SVG OR MERMAID USED IN THIS DOCUMENT -->
+    <!-- Source Material Analysis:
+         - Goal: Passive House in Chiang Mai (Wood Structure, Metal Roof, High Glass).
+         - Timeline: 2030-2035.
+         - Budget: Land 6-8M, Build costs estimated based on high-end specs.
+         - Plan Narrative: Introduction -> Financial Summary -> Detailed Breakdown -> Timeline -> Passive Design Analysis.
+    -->
+    <!-- Chart Choice Summary:
+         1. Budget Composition -> Goal: Compare -> Donut Chart (Chart.js) -> Shows proportions of Land vs Build vs Fees.
+         2. Detailed Line Items -> Goal: Compare/Rank -> Horizontal Bar Chart (Chart.js) -> Handles long labels and ranking costs.
+         3. Cash Flow/Spend -> Goal: Change -> Area Chart (Chart.js) -> Visualizes spending ramp-up.
+         4. Material Mix -> Goal: Composition -> Pie Chart (Chart.js) -> Visualizes Wood/Glass dominance.
+         5. Design Trade-offs -> Goal: Relationships -> Radar Chart (Chart.js) -> Visualizes Efficiency vs Cost vs Aesthetics.
+    -->
+  </head>
+  <body class="antialiased pb-20">
+    <!-- Header Section -->
+    <header
+      class="bg-brand-navy text-white py-12 px-4 sm:px-6 lg:px-8 shadow-lg relative overflow-hidden"
+    >
+      <div class="max-w-7xl mx-auto relative z-10">
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+          Chiang Mai <span class="text-brand-coral">Passive House</span> Project
+        </h1>
+        <p class="text-brand-aqua text-xl max-w-2xl font-light">
+          Project Feasibility, Cost Estimation & Design Strategy (2030-2035)
+        </p>
+      </div>
+      <!-- Abstract Decorative background element (CSS only) -->
+      <div
+        class="absolute top-0 right-0 w-1/3 h-full bg-brand-steel opacity-20 transform skew-x-12 translate-x-12"
+      ></div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
+      <!-- Executive Summary Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <!-- Total Estimate Card -->
+        <div class="card p-6 border-l-8 border-brand-coral">
+          <h3
+            class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2"
+          >
+            Total Estimated Cost
+          </h3>
+          <div class="flex items-baseline">
+            <span class="text-4xl font-bold text-brand-navy">฿34.8M</span>
+            <span class="ml-2 text-sm text-gray-500">THB</span>
+          </div>
+          <p class="text-xs text-gray-400 mt-2">
+            Includes Land, Build, Fees & Contingency
+          </p>
+        </div>
+
+        <!-- Timeline Card -->
+        <div class="card p-6 border-l-8 border-brand-steel">
+          <h3
+            class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2"
+          >
+            Project Duration
+          </h3>
+          <div class="flex items-baseline">
+            <span class="text-4xl font-bold text-brand-navy">5</span>
+            <span class="ml-2 text-sm text-gray-500">Years (2030-2035)</span>
+          </div>
+          <p class="text-xs text-gray-400 mt-2">
+            Design: '31-'33 | Build: '32-'35
+          </p>
+        </div>
+
+        <!-- Build Spec Card -->
+        <div class="card p-6 border-l-8 border-brand-aqua">
+          <h3
+            class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2"
+          >
+            Build Concept
+          </h3>
+          <div class="text-xl font-bold text-brand-navy">Passive / Hybrid</div>
+          <div class="mt-2 text-sm text-gray-600">
+            <span
+              class="inline-block bg-brand-light text-brand-navy px-2 py-1 rounded text-xs font-semibold mr-1"
+              >Teak Structure</span
+            >
+            <span
+              class="inline-block bg-brand-light text-brand-navy px-2 py-1 rounded text-xs font-semibold"
+              >High Glass %</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Introduction Text -->
+      <div class="bg-white rounded-lg shadow-sm p-8 mb-12">
+        <h2 class="text-2xl font-bold text-brand-navy mb-4">
+          Executive Consultant Summary
+        </h2>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          This feasibility study outlines the financial and logistical
+          requirements for the proposed custom residence in Chiang Mai. Based on
+          the "Chiang Mai House Build Notes," the project aims to fuse
+          traditional Thai materiality (Teak, Stone) with high-performance
+          Passive House standards.
+        </p>
+        <p class="text-gray-700 leading-relaxed">
+          The total estimated budget of
+          <strong>฿34,800,000 THB</strong> accounts for the premium nature of
+          imported fenestration (windows/doors) required to maintain thermal
+          efficiency despite the desired high glass-to-wall ratio. The extensive
+          driveway and landscape requirements indicated in the floor plan have
+          been factored into the site works budget.
+        </p>
+      </div>
+
+      <!-- Section: Financial Breakdown -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        <!-- Chart 1: Total Budget Allocation -->
+        <div class="card p-6 flex flex-col">
+          <h3 class="text-lg font-bold text-brand-navy mb-2">
+            Budget Allocation Overview
+          </h3>
+          <p class="text-sm text-gray-500 mb-6">
+            High-level split between Land, Hard Construction, and Soft Costs.
+          </p>
+          <div class="flex-grow flex items-center justify-center">
+            <div class="chart-container">
+              <canvas id="budgetDoughnutChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chart 2: Detailed Cost Items -->
+        <div class="card p-6 flex flex-col">
+          <h3 class="text-lg font-bold text-brand-navy mb-2">
+            Detailed Cost Center Breakdown
+          </h3>
+          <p class="text-sm text-gray-500 mb-6">
+            Granular look at specific line items. Note the impact of "Base
+            House" and "Land".
+          </p>
+          <div class="flex-grow">
+            <div class="chart-container">
+              <canvas id="detailedCostChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Timeline & Phasing -->
+      <div class="card p-8 mb-12">
+        <h3 class="text-2xl font-bold text-brand-navy mb-4">
+          Strategic Timeline (2030 - 2035)
+        </h3>
+        <p class="text-gray-600 mb-8">
+          The schedule assumes a land purchase in 2030, followed by a dedicated
+          design year. The overlap between design finalization and permitting
+          allows for construction mobilization in late 2032.
+        </p>
+
+        <div class="overflow-x-auto">
+          <div class="min-w-[600px] timeline-grid font-mono text-sm">
+            <!-- Header Row -->
+            <div class="font-bold text-brand-navy">PHASE</div>
+            <div class="text-center bg-gray-100 py-1">2030</div>
+            <div class="text-center bg-gray-100 py-1">2031</div>
+            <div class="text-center bg-gray-100 py-1">2032</div>
+            <div class="text-center bg-gray-100 py-1">2033</div>
+            <div class="text-center bg-gray-100 py-1">2034</div>
+            <div class="text-center bg-gray-100 py-1">2035</div>
+
+            <!-- Land Search -->
+            <div class="text-gray-600 text-xs mt-2">Land/Legal</div>
+            <div
+              class="timeline-bar bg-brand-steel mt-2 col-span-2 mx-1 opacity-80"
+            >
+              Search & Buy
+            </div>
+            <div class="col-span-4"></div>
+
+            <!-- Design -->
+            <div class="text-gray-600 text-xs mt-2">Design/PHPP</div>
+            <div></div>
+            <div class="timeline-bar bg-brand-coral mt-2 col-span-2 mx-1">
+              Arch & Eng Design
+            </div>
+            <div class="col-span-3"></div>
+
+            <!-- Permits -->
+            <div class="text-gray-600 text-xs mt-2">Permits</div>
+            <div class="col-span-2"></div>
+            <div
+              class="timeline-bar bg-brand-aqua text-brand-navy mt-2 col-span-1 mx-1"
+            >
+              Approvals
+            </div>
+            <div class="col-span-3"></div>
+
+            <!-- Construction -->
+            <div class="text-gray-600 text-xs mt-2">Construction</div>
+            <div class="col-span-2"></div>
+            <div class="timeline-bar bg-brand-navy mt-2 col-span-3 mx-1 ml-4">
+              Main Construction Phase
+            </div>
+            <div></div>
+
+            <!-- Interior/Landscape -->
+            <div class="text-gray-600 text-xs mt-2">Fitout</div>
+            <div class="col-span-4"></div>
+            <div class="timeline-bar bg-brand-steel mt-2 col-span-2 mx-1">
+              Interiors & Landscape
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Design & Trade-offs -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div class="card p-6">
+          <h3 class="text-lg font-bold text-brand-navy mb-2">
+            Design Priorities & Trade-offs
+          </h3>
+          <p class="text-sm text-gray-500 mb-6">
+            Achieving "Passive House" standards with a high glass-to-wall ratio
+            requires balancing aesthetics with heavy investment in thermal
+            breaks and shading.
+          </p>
+          <div class="chart-container">
+            <canvas id="tradeoffRadarChart"></canvas>
+          </div>
+        </div>
+
+        <div class="card p-6">
+          <h3 class="text-lg font-bold text-brand-navy mb-2">
+            Material Composition & Cost Impact
+          </h3>
+          <p class="text-sm text-gray-500 mb-6">
+            The choice of Teak (Termite resistance) and High-Performance Glass
+            drives the material budget significantly higher than standard
+            concrete block builds.
+          </p>
+          <div class="chart-container">
+            <!-- Using Plotly for a Treemap equivalent or Stacked Bar -->
+            <canvas id="materialChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 py-8 border-t border-gray-200 mt-12">
+      <div class="max-w-7xl mx-auto px-4 text-center">
+        <p class="text-sm text-gray-500">
+          Generated by Canvas Infographics. Estimates are based on 2024/2025
+          market rates for luxury construction in Northern Thailand. Inflation
+          adjustments for 2030 start date are not included in raw figures.
+        </p>
+        <p class="text-xs text-gray-400 mt-2">
+          Palette: Strategic Blueprint (Navy/Coral).
+        </p>
+      </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+      // ---------------------------------------------------------
+      // UTILITIES
+      // ---------------------------------------------------------
+
+      // Label Splitting Logic (Max 16 chars per line)
+      const processLabel = (label) => {
+        if (label.length <= 16) return label;
+        const words = label.split(' ');
+        const lines = [];
+        let currentLine = words[0];
+
+        for (let i = 1; i < words.length; i++) {
+          if ((currentLine + ' ' + words[i]).length <= 16) {
+            currentLine += ' ' + words[i];
+          } else {
+            lines.push(currentLine);
+            currentLine = words[i];
+          }
+        }
+        lines.push(currentLine);
+        return lines;
+      };
+
+      // Standard Tooltip Configuration
+      const standardTooltipConfig = {
+        callbacks: {
+          title: function (tooltipItems) {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+              return label.join(' ');
+            } else {
+              return label;
+            }
+          },
+          label: function (context) {
+            let label = context.dataset.label || '';
+            if (label) {
+              label += ': ';
+            }
+            if (context.parsed.y !== null) {
+              label += new Intl.NumberFormat('th-TH', {
+                style: 'currency',
+                currency: 'THB',
+              }).format(context.parsed.y || context.parsed.x);
+            }
+            return label;
+          },
+        },
+      };
+
+      const horizontalTooltipConfig = {
+        callbacks: {
+          title: function (tooltipItems) {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+              return label.join(' ');
+            } else {
+              return label;
+            }
+          },
+          label: function (context) {
+            // For horizontal bars, the value is in x
+            let value = context.parsed.x;
+            return new Intl.NumberFormat('th-TH', {
+              style: 'currency',
+              currency: 'THB',
+              maximumSignificantDigits: 3,
+            }).format(value);
+          },
+        },
+      };
+
+      // Global Chart Defaults
+      Chart.defaults.font.family = "'Inter', sans-serif";
+      Chart.defaults.color = '#1D3557';
+
+      // ---------------------------------------------------------
+      // DATA SETS
+      // ---------------------------------------------------------
+
+      // 1. Budget Breakdown Data
+      const costCategories = [
+        'Land & Legal',
+        'Base House Construction',
+        'Interior & Finishes',
+        'Landscape & Driveway',
+        'Fees (Design/Permits/PM)',
+        'MEP & Solar',
+        'Contingency',
+      ];
+
+      const costValues = [
+        7500000, // Land 7m + 0.5m fees
+        9500000, // Structure + Windows + Roof
+        5300000, // Interiors + Kitchen + Maid
+        2900000, // Landscape + Pool + Garage + Driveway
+        2250000, // Design + PM + Consultant
+        1300000, // HVAC + Solar
+        2500000, // Contingency
+      ];
+
+      // 2. Detailed Line Items (For Horizontal Bar)
+      const detailedItems = [
+        { label: 'Base Structure (Wood/Metal)', value: 8000000 },
+        { label: 'Land Acquisition', value: 7000000 },
+        { label: 'Interior Fitout', value: 5000000 },
+        { label: 'High-Perf Windows & Doors', value: 2000000 },
+        { label: 'Pool & Landscaping', value: 1500000 },
+        { label: 'Kitchens & Cabinetry', value: 1500000 },
+        { label: 'Design Fees (Arch/Eng/Int)', value: 1200000 },
+        { label: 'Furniture & Appliances', value: 1000000 },
+        { label: 'Project Management', value: 9000000 },
+        { label: 'HVAC (ERV + Cooling)', value: 8000000 },
+        { label: 'Garage Construction', value: 600000 },
+        { label: 'Driveway (Paving)', value: 500000 },
+        { label: 'Solar System', value: 500000 },
+        { label: 'Passive House Consultant', value: 400000 },
+      ];
+      // Sort for better visualization
+      detailedItems.sort((a, b) => b.value - a.value);
+
+      // ---------------------------------------------------------
+      // CHARTS IMPLEMENTATION
+      // ---------------------------------------------------------
+
+      // CHART 1: DOUGHNUT - Budget Overview
+      const ctxDoughnut = document
+        .getElementById('budgetDoughnutChart')
+        .getContext('2d');
+      new Chart(ctxDoughnut, {
+        type: 'doughnut',
+        data: {
+          labels: costCategories.map(processLabel),
+          datasets: [
+            {
+              data: costValues,
+              backgroundColor: [
+                '#1D3557', // Navy
+                '#E63946', // Coral
+                '#457B9D', // Steel
+                '#A8DADC', // Aqua
+                '#2a9d8f', // Teal (Additional)
+                '#e9c46a', // Yellow (Additional)
+                '#f4a261', // Orange (Additional)
+              ],
+              borderWidth: 0,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'right',
+              labels: { boxWidth: 12, font: { size: 11 } },
+            },
+            tooltip: standardTooltipConfig,
+          },
+        },
+      });
+
+      // CHART 2: HORIZONTAL BAR - Detailed Costs
+      const ctxBar = document
+        .getElementById('detailedCostChart')
+        .getContext('2d');
+      new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+          labels: detailedItems.map((item) => processLabel(item.label)),
+          datasets: [
+            {
+              label: 'Estimated Cost (THB)',
+              data: detailedItems.map((item) => item.value),
+              backgroundColor: '#457B9D',
+              borderRadius: 4,
+              barPercentage: 0.7,
+            },
+          ],
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: {
+                callback: function (value) {
+                  return '฿' + (value / 1000000).toFixed(1) + 'M';
+                },
+              },
+            },
+            y: {
+              grid: { display: false },
+            },
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: horizontalTooltipConfig,
+          },
+        },
+      });
+
+      // CHART 3: RADAR - Design Trade-offs
+      const ctxRadar = document
+        .getElementById('tradeoffRadarChart')
+        .getContext('2d');
+      new Chart(ctxRadar, {
+        type: 'radar',
+        data: {
+          labels: [
+            'Thermal Efficiency',
+            'Natural Light',
+            'Aesthetics',
+            'Cost Efficiency',
+            'Sustainability',
+            'Security',
+          ],
+          datasets: [
+            {
+              label: 'Project Concept',
+              data: [70, 95, 90, 60, 85, 80],
+              fill: true,
+              backgroundColor: 'rgba(230, 57, 70, 0.2)', // Coral transparent
+              borderColor: '#E63946',
+              pointBackgroundColor: '#E63946',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: '#E63946',
+            },
+            {
+              label: 'Standard Passive House',
+              data: [95, 60, 70, 75, 90, 80],
+              fill: true,
+              backgroundColor: 'rgba(29, 53, 87, 0.2)', // Navy transparent
+              borderColor: '#1D3557',
+              pointBackgroundColor: '#1D3557',
+              pointBorderColor: '#fff',
+              pointHoverBackgroundColor: '#fff',
+              pointHoverBorderColor: '#1D3557',
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          elements: { line: { borderWidth: 2 } },
+          scales: {
+            r: {
+              angleLines: { color: '#e5e7eb' },
+              grid: { color: '#e5e7eb' },
+              pointLabels: {
+                font: { size: 11, weight: '600' },
+                color: '#1D3557',
+              },
+              suggestedMin: 0,
+              suggestedMax: 100,
+            },
+          },
+          plugins: {
+            legend: { position: 'bottom' },
+            tooltip: standardTooltipConfig,
+          },
+        },
+      });
+
+      // CHART 4: MATERIAL COMPOSITION (Pie)
+      const ctxMaterial = document
+        .getElementById('materialChart')
+        .getContext('2d');
+      new Chart(ctxMaterial, {
+        type: 'pie',
+        data: {
+          labels: [
+            'Structural Wood (Teak)',
+            'Glass (Glazing)',
+            'Metal (Roofing)',
+            'Stone/Concrete',
+            'Insulation/Other',
+          ],
+          datasets: [
+            {
+              data: [40, 25, 15, 10, 10], // Estimated percentages of material cost
+              backgroundColor: [
+                '#8D6E63', // Wood color (Brown-ish)
+                '#A8DADC', // Glass color (Aqua)
+                '#457B9D', // Metal color (Steel)
+                '#B0BEC5', // Stone color (Grey)
+                '#FFCC80', // Insulation
+              ],
+              borderWidth: 1,
+              borderColor: '#ffffff',
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'right' },
+            tooltip: {
+              callbacks: {
+                title: function (tooltipItems) {
+                  return tooltipItems[0].label;
+                },
+                label: function (context) {
+                  return context.raw + '% of Material Budget';
+                },
+              },
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
